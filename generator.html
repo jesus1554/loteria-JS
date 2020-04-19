@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON random number generator</title>
+</head>
+<style>
+    body {
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #F5efff;
+        color: #9A48D0;
+        text-align: center;
+    }
+    #app {
+        width: 90%;
+        margin: 0 auto;
+    }
+    button {
+        background-color: #FF90B3;
+        border: none;
+        border-radius: 15px;
+        color: #9A48D0;
+        padding: 12px 20px;
+    }
+    textarea {
+        width: 100%;
+        height: 10vh;
+    }
+</style>
+<body>
+    <div id="app">
+        <h1>Generador de objetos JSON</h1>
+        <p>Copia y pega este texto para poder jugar la lotería.<br><b>Pásale este mismo texto a tus amigos para jugar
+            síncronamente</b></p>
+        <textarea id="response"></textarea>
+        <button class="btn" data-clipboard-target="#response">
+            Copiar al portapapeles
+        </button>
+</body>
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.3/clipboard.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    new Clipboard('.btn');
+    const contains = (n, arr) => arr.includes(n);
+    const generator = (from, to, arr) => {
+        const n = Math.floor(Math.random() * to) + from;
+        return contains(n, arr) ?
+            generator(from, to, arr) :
+            n;
+    }
+    function startGenerator() {
+        const cartas = [];
+        for (let i = 0; i < 54; ++i) {
+            const n = generator(1, 54, cartas);
+            cartas.push(n);
+        }
+
+        return cartas;
+    }
+    let JSONtext = JSON.stringify(startGenerator());
+    var contenido = document.createTextNode(JSONtext);
+    var elemento = document.querySelector('#response');
+    elemento.appendChild(contenido)
+</script>
+</html>

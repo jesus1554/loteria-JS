@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Loteria con Vue JS</title>
+</head>
+
+<body>
+    <aside class="griton">
+    </aside>
+    <div class="vue-container" id="app">
+        <section class="tarjeta">
+            <button v-for="card of cards" @click="clickRequest(card)" class="crd-basic" :id="'c' + card">
+                <img class="imgtarjeta" :src="'img/' + card + '.jpg'">
+            </button>
+        </section>
+    </div>
+    <main class="parrafo">
+    </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="module" src="js/test.js"></script>
+<script type="module" src="js/index.js"></script>
+
+</html>
